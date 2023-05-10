@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MBModManager", "MBModManager.csproj", "{3AAD9487-0AE7-40F6-B68D-3FD0091DBF3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9C093160-FB78-4AE6-B267-67B7A5EB22F5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AAD9487-0AE7-40F6-B68D-3FD0091DBF3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAD9487-0AE7-40F6-B68D-3FD0091DBF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAD9487-0AE7-40F6-B68D-3FD0091DBF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAD9487-0AE7-40F6-B68D-3FD0091DBF3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {632EE1B3-DA60-4416-B93C-67D281ED24AB}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "0xbfBzp92YRktchExxNswqjjqN8jACc4J0kYTXB90HA+lc9heW9BHLlqXWqddXKeLpLfYL1Bx0JHvqcBevpYRQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Drick\\source\\repos\\MBModManager\\MBModManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Drick\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\Drick\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\Drick\\.nuget\\packages\\mahapps.metro.iconpacks.modern\\4.11.0\\mahapps.metro.iconpacks.modern.4.11.0.nupkg.sha512",
+    "C:\\Users\\Drick\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\Drick\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Drick\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}
