@@ -54,7 +54,7 @@ namespace MBModManager {
 
         
         private void checkUpdates(object sender, System.Windows.RoutedEventArgs e) {
-            // System.Diagnostics.Process.Start("https://github.com/NightPotato/MBModManager");
+            Process.Start(new ProcessStartInfo("https://github.com/NightPotato/MBModManager") { UseShellExecute = true });
         }
 
         private void LaunchGame_btn_Click(object sender, System.Windows.RoutedEventArgs e) {
