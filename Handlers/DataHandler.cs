@@ -1,22 +1,26 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace MBModManager
+namespace MBModManager.Handlers
 {
-    internal class DataManager
+    internal class DataHandler
     {
 
         public static Settings LoadAppSettings()
         {
 
             string confPath = System.AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
-            if (File.Exists(confPath)) {
+            if (File.Exists(confPath))
+            {
                 Settings appSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(confPath));
-                if (appSettings == null) {
+                if (appSettings == null)
+                {
                     appSettings = new Settings("No Path Set", "No Path Set", "0.0.0");
                 }
                 return appSettings;
-            } else {
+            }
+            else
+            {
                 // Create & Save New Settings to File.
                 Settings appSettings = new Settings("No Path Set", "No Path Set", "0.0.0");
                 File.WriteAllText(confPath, JsonConvert.SerializeObject(appSettings, Formatting.Indented));
@@ -25,7 +29,8 @@ namespace MBModManager
 
         }
 
-        public static void SaveAppSettings(Settings appSettings) {
+        public static void SaveAppSettings(Settings appSettings)
+        {
             string confPath = System.AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
             File.WriteAllText(confPath, JsonConvert.SerializeObject(appSettings, Formatting.Indented));
         }

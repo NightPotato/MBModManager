@@ -61,9 +61,11 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Rectangle Height="184" Canvas.Left="598" Stroke="#CC60A917" Canvas.Top="54.263" Width="584" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#FF101010"/>
-                    <iconPacks:PackIconModern Kind="DiskDownload" Canvas.Left="857.5" Canvas.Top="105.263" Foreground="#FFDADADA" Height="41" Width="65"/>
-                    <Label Content="Drop Mod.zip Here" Canvas.Top="151.263" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="792.096" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid HorizontalAlignment="Center" Canvas.Left="598" Canvas.Top="54.263" VerticalAlignment="Center">
+                        <Rectangle Height="184" Stroke="#CC60A917" Width="584" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF101010"/>
+                        <iconPacks:PackIconModern Kind="DiskDownload" Foreground="#FFDADADA" Height="41" Width="65" HorizontalAlignment="Center" Margin="0,51,0,0"/>
+                        <Label Content="Drop Mod.zip Here" Foreground="#FFC3C3C3" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,97,0,0"/>
+                    </Grid>
                     <Button x:Name="LaunchGame_btn" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame_btn_Click"/>
                     <Button x:Name="bepinex_Install_btn" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="bepinex_Install_btn_Click"/>
                     <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0"/>
@@ -77,7 +79,7 @@
 
             </TabItem>
             <TabItem Header="Options">
-                <Canvas x:Name="Options_Section" Loaded="Options_Section_Loaded">
+                <Canvas x:Name="Options_Section" Loaded="Options_Section_Loaded" RenderTransformOrigin="0.423,0.601">
                     <Label Content="Game Directory&#xA;" Canvas.Top="9.999" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6"/>
                     <TextBox x:Name="GamePathBox" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="54.263" Width="1097" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF292929" BorderBrush="#FF477D11" Foreground="Gray"/>
                     <Button x:Name="setGamePath" Content="SET" Canvas.Left="1112" Canvas.Top="54.263" HorizontalAlignment="Center" VerticalAlignment="Center" Width="72" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetGamePath" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
@@ -87,7 +89,7 @@
                     <Label Content="Example: (C:\Program Files (x86)\Steam\steamapps\common\MonBazou)" Canvas.Left="172.48" Canvas.Top="19.302" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Example: (C:\Users\Admin\AppData\LocalLow\Santa Goat\Mon Bazou)" Canvas.Left="232.76" Canvas.Top="100.789" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <GroupBox Height="535" Header="Advanced Options (Don't Use if You have to Ask)" Width="386" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="179.263" RenderTransformOrigin="0,1"/>
-                    <Label Content="Install Unity-Explorer" Canvas.Top="213.999" Foreground="#FFC3C3C3" Canvas.Left="15.999" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+
 
                 </Canvas>
             </TabItem>
