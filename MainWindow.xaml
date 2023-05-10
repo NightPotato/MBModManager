@@ -11,6 +11,8 @@
                  WindowStartupLocation="CenterScreen"
                  mc:Ignorable="d" mah:ControlsHelper.ContentCharacterCasing="Upper" ResizeMode="NoResize" ResizeBorderThickness="6,0,6,6" BorderThickness="1,0,1,1" SnapsToDevicePixels="True">
 
+
+
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Button Click="openMBModding" ToolTip="Open Mon-Bazou Modding Site">
@@ -76,7 +78,7 @@
             </TabItem>
             <TabItem Header="Options">
                 <Canvas x:Name="Options_Section" Loaded="Options_Section_Loaded">
-                    <Label Content="Game Directory&#xA;" Canvas.Top="9.999" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6"/>
+                    <Label Content="Game Directory&#xA;" Canvas.Top="9.999" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6"/>
                     <TextBox x:Name="GamePathBox" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="54.263" Width="1097" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF292929" BorderBrush="#FF477D11" Foreground="Gray"/>
                     <Button x:Name="setGamePath" Content="SET" Canvas.Left="1112" Canvas.Top="54.263" HorizontalAlignment="Center" VerticalAlignment="Center" Width="72" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetGamePath" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
                     <Label Content="Game Saves Directory" Canvas.Top="89.999" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -85,6 +87,7 @@
                     <Label Content="Example: (C:\Program Files (x86)\Steam\steamapps\common\MonBazou)" Canvas.Left="172.48" Canvas.Top="19.302" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Example: (C:\Users\Admin\AppData\LocalLow\Santa Goat\Mon Bazou)" Canvas.Left="232.76" Canvas.Top="100.789" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <GroupBox Height="535" Header="Advanced Options (Don't Use if You have to Ask)" Width="386" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="179.263" RenderTransformOrigin="0,1"/>
+                    <Label Content="Install Unity-Explorer" Canvas.Top="213.999" Foreground="#FFC3C3C3" Canvas.Left="15.999" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
 
                 </Canvas>
             </TabItem>
