@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using System.Diagnostics;
+using System.IO;
 
 namespace MBModManager.Events {
     internal class GeneralEvents {
@@ -32,5 +33,13 @@ namespace MBModManager.Events {
 
             await mv.ShowMessageAsync("Missing Required Mods", missingMods_output, MessageDialogStyle.Affirmative, dialogSettings);
         } 
+
+        public static void CLEANUP_WORKDIR() {
+            string workDir = System.AppDomain.CurrentDomain.BaseDirectory + "\\workdir";
+            if (Directory.Exists(workDir)) {
+                Directory.Delete(workDir, true);
+            }
+        }
+
     }
 }

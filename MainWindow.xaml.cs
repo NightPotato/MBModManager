@@ -1,6 +1,12 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using MBModManager.Events;
+using MBModManager.Handlers;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace MBModManager {
     /// <summary>
@@ -57,6 +63,87 @@ namespace MBModManager {
 
         private void bepinex_Install_btn_Click(object sender, System.Windows.RoutedEventArgs e) {
             InstallEvents.BIX_INSTALL(this);
+        }
+
+        // Drag-n-Drop Enter Check
+        private void mod_install_box_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private async void mod_install_box_Drop(object sender, DragEventArgs e) {
+            //InstallEvents.MOD_INSTALL(this);
+
+
+            // Setup Dialog Controller
+            MetroDialogSettings dialogSettings = new MetroDialogSettings();
+            dialogSettings.ColorScheme = MetroDialogColorScheme.Inverted;
+            var controller = await this.ShowProgressAsync("Installing Mod!", "Moving mod.zip to working-directory.", false, dialogSettings);
+            controller.SetProgressBarForegroundBrush(new SolidColorBrush(Color.FromRgb(71, 125, 17)));
+
+            // Check if Multiple Files were dropped in the install.
+            string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if (filePaths.Length > 1) {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "Please only drop one mod at a time. We currently do not support installing multiple mods at a time.", false);
+                return;
+            }
+            controller.SetProgress(0.05);
+            await Task.Delay(500);
+
+            // Check if filePaths is null
+            if (filePaths == null) {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "There is something wrong with the file provided, please try a different file.", false);
+                return;
+            }
+            controller.SetProgress(0.10);
+            await Task.Delay(500);
+
+
+            // Setup workDir for Operations
+            string workDir = System.AppDomain.CurrentDomain.BaseDirectory + "\\workdir";
+            bool worDirExists = Directory.Exists(workDir);
+
+            if (!worDirExists) {
+                Directory.CreateDirectory(workDir);
+            }
+            controller.SetProgress(0.15);
+            await Task.Delay(500);
+
+            // Check if The file dropped is a zip file.
+            if (Path.GetExtension(filePaths[0]) != ".zip") {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "The file provided was not a valid mod, please try a different file.", false);
+                return;
+            }
+            controller.SetProgress(0.20);
+            await Task.Delay(500);
+
+
+            // Check if the New File already exists in workdir.
+            string fileName = Path.GetFileName(filePaths[0]);
+            if (File.Exists(workDir + "\\" + fileName)) {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "The working directory aready contains the file your trying to install. Please cleanup the workDir in the options menu!", false);
+                return;
+            }
+
+            // Copy the File to WorkDir
+            File.Copy(filePaths[0], workDir + "\\" + fileName);
+            controller.SetProgress(0.24);
+            await Task.Delay(500);
+
+            //
+            // BELOW THIS POINT IF ERROR CLEANUP WORKDIR
+
+
+
+            // Close Dialog Controller
+            controller.SetProgress(0.99999);
+            await Task.Delay(5000);
+            await controller.CloseAsync();
+
         }
 
     }

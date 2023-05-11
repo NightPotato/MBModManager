@@ -62,7 +62,7 @@
                         </ListView.View>
                     </ListView>
                     <Grid HorizontalAlignment="Center" Canvas.Left="598" Canvas.Top="54.263" VerticalAlignment="Center">
-                        <Rectangle Height="184" Stroke="#CC60A917" Width="584" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF101010"/>
+                        <Rectangle x:Name="mod_install_box" Height="184" Stroke="#CC60A917" Width="584" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF101010" Drop="mod_install_box_Drop" DragEnter="mod_install_box_DragEnter" AllowDrop="True"/>
                         <iconPacks:PackIconModern Kind="DiskDownload" Foreground="#FFDADADA" Height="41" Width="65" HorizontalAlignment="Center" Margin="0,51,0,0"/>
                         <Label Content="Drop Mod.zip Here" Foreground="#FFC3C3C3" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,97,0,0"/>
                     </Grid>
