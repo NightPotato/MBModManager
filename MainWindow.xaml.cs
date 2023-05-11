@@ -29,19 +29,23 @@ namespace MBModManager {
         // Options Section Events
         //
 
-        private void Options_Section_Loaded(object sender, System.Windows.RoutedEventArgs e) {
+        private void Options_Section_Loaded(object sender, RoutedEventArgs e) {
             SavePathBox.Text = clientSettings.SavesPath;
             GamePathBox.Text = clientSettings.GamePath;
         }
 
-        private void SetGamePath(object sender, System.Windows.RoutedEventArgs e) {
+        private void SetGamePath(object sender, RoutedEventArgs e) {
             clientSettings.GamePath = GamePathBox.Text;
-            Handlers.DataHandler.SaveAppSettings(clientSettings);
+            DataHandler.SaveAppSettings(clientSettings);
         }
 
-        private void SetSavePath(object sender, System.Windows.RoutedEventArgs e) {
+        private void SetSavePath(object sender, RoutedEventArgs e) {
             clientSettings.SavesPath = SavePathBox.Text;
-            Handlers.DataHandler.SaveAppSettings(clientSettings);
+            DataHandler.SaveAppSettings(clientSettings);
+        }
+
+        private void clean_WorkDIr_btn_Click(object sender, RoutedEventArgs e) {
+            GeneralEvents.CLEANUP_WORKDIR();
         }
 
 
@@ -49,10 +53,10 @@ namespace MBModManager {
         // MainWindow Events 
         //
 
-        private void openMBModding(object sender, System.Windows.RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://mods-monbazou.amenofisch.dev"); }
-        private void checkUpdates(object sender, System.Windows.RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://github.com/NightPotato/MBModManager"); }
+        private void openMBModding(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://mods-monbazou.amenofisch.dev"); }
+        private void checkUpdates(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://github.com/NightPotato/MBModManager"); }
 
-        private void LaunchGame_btn_Click(object sender, System.Windows.RoutedEventArgs e) {
+        private void LaunchGame_btn_Click(object sender, RoutedEventArgs e) {
             if (GeneralEvents.CHECK_DEPS() == false) { return; }
             Process.Start(clientSettings.GamePath + "\\Mon Bazou.exe");
         }
@@ -62,7 +66,7 @@ namespace MBModManager {
         // Mods Section Events
         //
 
-        private void bepinex_Install_btn_Click(object sender, System.Windows.RoutedEventArgs e) {
+        private void bepinex_Install_btn_Click(object sender, RoutedEventArgs e) {
             InstallEvents.BIX_INSTALL(this);
         }
 
@@ -174,7 +178,6 @@ namespace MBModManager {
             await controller.CloseAsync();
 
         }
-
     }
 
 
