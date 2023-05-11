@@ -4,6 +4,7 @@ using MBModManager.Events;
 using MBModManager.Handlers;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -85,6 +86,12 @@ namespace MBModManager {
             var controller = await this.ShowProgressAsync("Installing Mod!", "Moving mod.zip to working-directory.", false, dialogSettings);
             controller.SetProgressBarForegroundBrush(new SolidColorBrush(Color.FromRgb(71, 125, 17)));
 
+            // Check if GamePath is set
+            if (clientSettings.GamePath == null || clientSettings.GamePath == "Path Not Set") {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "GamePath was not set in options, please set the GamePath and try again.", false);
+                return;
+            }
+
             // Check if Multiple Files were dropped in the install.
             string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (filePaths.Length > 1) {
@@ -105,11 +112,17 @@ namespace MBModManager {
 
             // Setup workDir for Operations
             string workDir = System.AppDomain.CurrentDomain.BaseDirectory + "\\workdir";
-            bool worDirExists = Directory.Exists(workDir);
+            bool workDirExists = Directory.Exists(workDir);
 
-            if (!worDirExists) {
+            if (!workDirExists) {
                 Directory.CreateDirectory(workDir);
             }
+
+            if (workDir == null) {
+                ErrorHandler.MOD_INSTALL_FAILED(controller, "Failed to create Working Directory.", false);
+                return;
+            }
+
             controller.SetProgress(0.15);
             await Task.Delay(500);
 
@@ -134,9 +147,25 @@ namespace MBModManager {
             controller.SetProgress(0.24);
             await Task.Delay(500);
 
-            //
             // BELOW THIS POINT IF ERROR CLEANUP WORKDIR
 
+
+            // Check if mod contains a correct structure.
+            // Create Directory to Extract Files
+            string modDir = Path.GetFileNameWithoutExtension(filePaths[0]);
+            string outputDir = workDir + "\\" + modDir;
+            Directory.CreateDirectory(outputDir);
+
+            // Unzip mod.zip to ModDir
+            string zipPath = workDir + "\\" + fileName;
+            try {
+                ZipFile.ExtractToDirectory(zipPath, outputDir);
+            } catch {
+                Handlers.ErrorHandler.MOD_INSTALL_FAILED(controller, "Could not extract the mod to working directory, performing cleanup of Working Directory.", true);
+                return;
+            }
+
+            // Copy Mod in modDir to GamePath/BepInEx/
 
 
             // Close Dialog Controller
