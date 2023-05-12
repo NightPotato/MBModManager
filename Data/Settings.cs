@@ -2,8 +2,6 @@
 {
     public class Settings
     {
-
-
         public string? GamePath { get; set; }
         public string? GameVersion { get; set; }
         public string? SavesPath { get; set; }

@@ -26,7 +26,6 @@ namespace MBModManager
             InitializeComponent();
         }
 
-
         //
         // Options Section Events
         //
@@ -170,6 +169,8 @@ namespace MBModManager
                 Handlers.ErrorHandler.MOD_INSTALL_FAILED(controller, "Could not extract the mod to working directory, performing cleanup of Working Directory.", true);
                 return;
             }
+
+            // Gather ModInfo for the mod being installed and check if it is currently a hosted mod within the API.
 
             // Copy Mod in modDir to GamePath/BepInEx/
 
