@@ -25,7 +25,7 @@ namespace MBModManager.Events {
             }
 
             // Verify Internal Data Exists
-            if (mv.clientSettings.InternalData == null || mv.clientSettings.InternalData[2] == null) {
+            if (mv.clientSettings.InternalData == null || mv.clientSettings.InternalData.BepInExURL == null) {
                 Handlers.ErrorHandler.BIX_INSTALL_FAILED(controller, "Some of the applications internal data is missing, please delete settings.json and relaunch MBModManager.");
                 return;
             }
@@ -41,7 +41,7 @@ namespace MBModManager.Events {
             string zipPath = workDir + "BepInEx.zip";
             using (var client = new HttpClient()) {
                 controller.SetProgress(0.25f);
-                var response = await client.GetByteArrayAsync(mv.clientSettings.InternalData[2]);
+                var response = await client.GetByteArrayAsync(mv.clientSettings.InternalData.BepInExURL);
                 File.WriteAllBytes(zipPath, response);
                 controller.SetProgress(0.35f);
                 controller.SetMessage("Finished Downloading BepInEx.");

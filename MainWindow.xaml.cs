@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using MBModManager.Data;
 using MBModManager.Events;
 using MBModManager.Handlers;
 using System.Diagnostics;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace MBModManager {
+namespace MBModManager
+{
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
