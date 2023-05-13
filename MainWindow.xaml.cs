@@ -60,7 +60,7 @@ namespace MBModManager
             DataHandler.SaveAppSettings(clientSettings);
         }
 
-        private void clean_WorkDIr_btn_Click(object sender, RoutedEventArgs e) {
+        private void clear_workDir_btn_Click(object sender, RoutedEventArgs e) {
             GeneralEvents.CLEANUP_WORKDIR();
         }
 
@@ -198,6 +198,7 @@ namespace MBModManager
             await controller.CloseAsync();
 
         }
+
     }
 
 

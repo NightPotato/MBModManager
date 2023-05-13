@@ -98,6 +98,8 @@
                     <Label Content="Example: (C:\Program Files (x86)\Steam\steamapps\common\MonBazou)" Canvas.Left="172.48" Canvas.Top="19.302" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Example: (C:\Users\Admin\AppData\LocalLow\Santa Goat\Mon Bazou)" Canvas.Left="232.76" Canvas.Top="100.789" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <GroupBox Height="535" Header="Advanced Options (Don't Use if You have to Ask)" Width="386" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="179.263" RenderTransformOrigin="0,1"/>
+                    <Button x:Name="clear_workDir_btn" Content="clear working directory" Canvas.Left="17.067" Canvas.Top="659.596" Width="372" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Click="clear_workDir_btn_Click" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button x:Name="uninstall_allMods_btn" Content="uninstall all mods" Canvas.Left="17.067" Canvas.Top="606.596" Width="372" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
                 </Canvas>
