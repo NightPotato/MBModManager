@@ -3,6 +3,8 @@ using MahApps.Metro.Controls.Dialogs;
 using MBModManager.Data;
 using MBModManager.Events;
 using MBModManager.Handlers;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -18,12 +20,25 @@ namespace MBModManager
     public partial class MainWindow : MetroWindow {
 
         public Settings clientSettings;
+        private ObservableCollection<ModInfo> modList;
 
         public  MainWindow() {
             
             // Load Application Settings
-            clientSettings = Handlers.DataHandler.LoadAppSettings();
+            clientSettings = DataHandler.LoadAppSettings();
+            modList = DataHandler.GetModList();
+
             InitializeComponent();
+            installedMods.ItemsSource = modList;
+            installedMods.DataContext = this;
+
+        }
+
+
+        public ObservableCollection<ModInfo> ModList {
+            get {
+                return modList;
+            }
         }
 
         //
@@ -171,6 +186,8 @@ namespace MBModManager
             }
 
             // Gather ModInfo for the mod being installed and check if it is currently a hosted mod within the API.
+            // BackpackMod-19-1-0-3-1659649243.zip
+
 
             // Copy Mod in modDir to GamePath/BepInEx/
 

@@ -54,12 +54,17 @@
             <TabItem Header="Mods">
                 <Canvas>
                     <Label Content="Mod List" Canvas.Top="14.999" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="253.45"/>
-                    <ListView x:Name="installedMods" Height="658" Width="581" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Center" Canvas.Top="54.263" VerticalAlignment="Top" Canvas.Left="10" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn/>
-                            </GridView>
-                        </ListView.View>
+                    <ListView x:Name="installedMods" ItemsSource="{Binding ModList}"  Height="658" Width="581" HorizontalAlignment="Center" Canvas.Top="54.263" VerticalAlignment="Top" Canvas.Left="10" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Margin="0,0,0,8" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas Height="55" Margin="0,0,0,8">
+                                    <Rectangle Height="60" Width="581" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
+                                    <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Canvas.Left="10" Canvas.Top="4"/>
+                                    <Label Content="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Foreground="#FF868686" Canvas.Top="30" Panel.ZIndex="0" Canvas.Left="15"/>
+                                    <Button Content="Not Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF848484" BorderBrush="#FF848484" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Canvas.Left="425" Canvas.Top="15"/>
+                                </Canvas>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                     <Grid HorizontalAlignment="Center" Canvas.Left="598" Canvas.Top="54.263" VerticalAlignment="Center">
                         <Rectangle x:Name="mod_install_box" Height="184" Stroke="#CC60A917" Width="584" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF101010" Drop="mod_install_box_Drop" DragEnter="mod_install_box_DragEnter" AllowDrop="True"/>
@@ -75,6 +80,10 @@
                 <Canvas>
                     <Label Content="Work-In-Progress" Canvas.Top="28.793" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="505.65"/>
                     <Label Content="We are currently working on making a good way to swap save-files and keep them in the repository for people to directly load." Canvas.Top="73.056" Foreground="#FFC3C3C3" FontSize="16" Canvas.Left="144.065" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Rectangle Height="55" Canvas.Left="330.68" Canvas.Top="191.04" Width="502" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515"/>
+                    <Label Content="MODNAME" Canvas.Left="337.666" Canvas.Top="196.576" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Label Content="ModDesc" Canvas.Left="351.834" Canvas.Top="217.906" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="8" Foreground="#FF868686"/>
+                    <Button x:Name="rs" Content="enabled" Canvas.Left="749.334" Canvas.Top="205.54" HorizontalAlignment="Left" VerticalAlignment="Top" Width="72" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
                 </Canvas>
 
             </TabItem>

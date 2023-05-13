@@ -10,6 +10,8 @@ namespace MBModManager.Data {
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? Author { get; set; }
+        public bool? isEnabled { get; set; }
+        public bool? isInstalled { get; set; }
         public string[]? Tags { get; set; }
         public string[]? depends_on { get; set; }
         public string[]? ModFiles { get; set; }

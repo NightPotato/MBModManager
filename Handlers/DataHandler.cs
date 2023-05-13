@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace MBModManager.Handlers
@@ -55,6 +56,18 @@ namespace MBModManager.Handlers
 
                 return "";
             }
+        }
+
+
+        public static ObservableCollection<ModInfo> GetModList() {
+
+            var modList = new ObservableCollection<ModInfo>();
+            for (int i = 0; i < 50; i++) {
+                modList.Add(new ModInfo("Failed to Get Mod List", "If you see this message, please try again later.", "PotatDev180#1911"));
+            }
+
+
+            return modList;
         }
 
     }
