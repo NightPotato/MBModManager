@@ -69,14 +69,14 @@ namespace MBModManager
         }
 
         private bool SearchFilter(object item) {
-            if (string.IsNullOrEmpty(search_box.Text)) {
+            if (string.IsNullOrEmpty(SearchTextBox.Text)) {
                 return true;
             } else {
-                if (search_box.Text.StartsWith("@")) {
-                    string searchBy = search_box.Text.Trim(new char[] { '@' });
+                if (SearchTextBox.Text.StartsWith("@")) {
+                    string searchBy = SearchTextBox.Text.Trim(new char[] { '@' });
                     return ((item as ModInfo).Author.IndexOf(searchBy, StringComparison.OrdinalIgnoreCase) >= 0);
                 } else {
-                    return ((item as ModInfo).Name.IndexOf(search_box.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                    return ((item as ModInfo).Name.IndexOf(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
                 }
             }
         }
