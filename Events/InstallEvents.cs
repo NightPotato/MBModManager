@@ -184,14 +184,14 @@ namespace MBModManager.Events {
 
             modToInstall.IsInstalled = true;
             mv.InstalledMods.Add(modToInstall);
-            mv.modList.Add(modToInstall);
+            mv.ModList.Add(modToInstall);
             controller.SetProgress(0.40);
 
             // Save Installed Mods To File.
             DataHandler.SaveInstalledMods(mv.InstalledMods);
 
             // Refresh Mod List
-            mv.modList.Clear();
+            mv.ModList.Clear();
             APIHandler.GetAllMods(mv);
 
             // Close Dialog Controller

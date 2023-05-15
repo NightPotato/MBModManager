@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace MBModManager.Models {
@@ -30,7 +31,7 @@ namespace MBModManager.Models {
             IsEnabled = false;
             IsInstalled = false;
             Tags = tags;
-            DependsOn = new ModInfo[] { };
+            DependsOn = Array.Empty<ModInfo>();
             ModFiles = new List<string> { };
         }
     }

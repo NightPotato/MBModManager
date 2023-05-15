@@ -29,9 +29,9 @@ namespace MBModManager.Events {
             dialogSettings.ColorScheme = MetroDialogColorScheme.Inverted;
 
             // Format Missing Mods list
-            string missingMods_output = "[]";
+            const string missingModsOutput = "[]";
 
-            await mv.ShowMessageAsync("Missing Required Mods", missingMods_output, MessageDialogStyle.Affirmative, dialogSettings);
+            await mv.ShowMessageAsync("Missing Required Mods", missingModsOutput, MessageDialogStyle.Affirmative, dialogSettings);
         } 
 
         public static void CleanupWorkDir() {

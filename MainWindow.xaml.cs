@@ -23,9 +23,9 @@ namespace MBModManager
     public partial class MainWindow : MetroWindow {
 
         public Settings ClientSettings;
-        public ObservableCollection<ModInfo> modList;
-        private ObservableCollection<ModInfo> depsList;
-        private ObservableCollection<Tag> tagsList;
+        public ObservableCollection<ModInfo> ModList;
+        private ObservableCollection<ModInfo> DepsList;
+        private ObservableCollection<Tag> TagsList;
         private IsEnabledState _modEnabledState;
         public List<ModInfo> InstalledMods; 
 
@@ -34,38 +34,25 @@ namespace MBModManager
             // Load Application Settings
             ClientSettings = DataHandler.LoadAppSettings();
             InstalledMods = DataHandler.LoadInstalledMods();
-            modList = new ObservableCollection<ModInfo>();
-            depsList = new ObservableCollection<ModInfo>();
-            tagsList = new ObservableCollection<Tag>();
+            ModList = new ObservableCollection<ModInfo>();
+            DepsList = new ObservableCollection<ModInfo>();
+            TagsList = new ObservableCollection<Tag>();
             APIHandler.GetAllMods(this);
             _modEnabledState = new IsEnabledState(false);
 
             InitializeComponent();
 
-            ModListing.ItemsSource = modList;
+            ModListing.ItemsSource = ModList;
             ModListing.DataContext = this;
-            ModDependenciesList.ItemsSource = depsList;
+            ModDependenciesList.ItemsSource = DepsList;
             ModDependenciesList.DataContext = this;
-            ModTagsList.ItemsSource = tagsList;
+            ModTagsList.ItemsSource = TagsList;
             ModTagsList.DataContext = this;
             ModEnabledStatus.DataContext = _modEnabledState;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ModListing.ItemsSource);
             view.Filter = SearchFilter;
 
-        }
-
-
-        public ObservableCollection<ModInfo> DepsList {
-            get { return depsList; }
-        }
-
-        public ObservableCollection<ModInfo> ModList {
-            get { return modList; }
-        }
-
-        public ObservableCollection<Tag> TagsList {
-            get { return tagsList; }
         }
 
         private bool SearchFilter(object item) {
@@ -110,13 +97,10 @@ namespace MBModManager
         // MainWindow Events 
         //
 
-        private void OpenMBModding(object sender, RoutedEventArgs e) {
-            GeneralEvents.OpenWeb("https://mods-monbazou.amenofisch.dev");
-        }
+        private void OpenMBModding(object sender, RoutedEventArgs e) => GeneralEvents.OpenWeb("https://mods-monbazou.amenofisch.dev");
 
-        private void CheckUpdates(object sender, RoutedEventArgs e) { 
-            GeneralEvents.OpenWeb("https://github.com/NightPotato/MBModManager");
-        }
+        private void CheckUpdates(object sender, RoutedEventArgs e) => GeneralEvents.OpenWeb("https://github.com/NightPotato/MBModManager");
+
 
         private void LaunchGame(object sender, RoutedEventArgs e) {
             if (GeneralEvents.CheckDependencies() == false) { return; }
@@ -128,7 +112,7 @@ namespace MBModManager
         // Mods Section Events
         //
 
-        private void search_box_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) {
+        private void SearchBoxSelectionChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) {
             if (ModListing.ItemsSource != null) {
                 CollectionViewSource.GetDefaultView(ModListing.ItemsSource).Refresh();
             }
@@ -153,16 +137,16 @@ namespace MBModManager
             _modEnabledState.Set(selectedMod.IsEnabled);
 
             if (selectedMod.Tags != null) {
-                tagsList.Clear();
+                TagsList.Clear();
                 foreach (var tag in selectedMod.Tags) {
-                    tagsList.Add(tag);
+                    TagsList.Add(tag);
                 }
             }
 
             if (selectedMod.DependsOn != null) {
-                depsList.Clear();
+                DepsList.Clear();
                 foreach (var dep in selectedMod.DependsOn) {
-                    depsList.Add(dep);
+                    DepsList.Add(dep);
                 }
             }
         }
