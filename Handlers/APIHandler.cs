@@ -18,9 +18,10 @@ namespace MBModManager.Handlers {
                     return;
                 }
 
-                // Exclude Any Mod that is already installed.
-
                 foreach (ModInfo info in obj) {
+                    if (mv.InstalledMods.Contains(info)) {
+                        return;
+                    }
                     mv.ModList.Add(info);
                 }
             }

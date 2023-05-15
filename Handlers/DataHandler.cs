@@ -2,8 +2,10 @@
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Documents;
 
 namespace MBModManager.Handlers
 {
@@ -36,7 +38,7 @@ namespace MBModManager.Handlers
 
         public static void SaveAppSettings(Settings appSettings)
         {
-            string confPath = System.AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
+            string confPath = AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
             File.WriteAllText(confPath, JsonConvert.SerializeObject(appSettings, Formatting.Indented));
         }
 
@@ -58,6 +60,25 @@ namespace MBModManager.Handlers
             }
         }
 
+        public static void SaveInstalledMods(List<ModInfo> mods) {
+            //  Saving to data.json
+            string confPath = AppDomain.CurrentDomain.BaseDirectory + "/data.json";
+            File.WriteAllText(confPath, JsonConvert.SerializeObject(mods, Formatting.Indented));
+        }
+
+        public static List<ModInfo> LoadInstalledMods() {
+            // Loading from data.json
+            string dataPath = AppDomain.CurrentDomain.BaseDirectory + "/data.json";
+            if (File.Exists(dataPath)) {
+                List<ModInfo> appSettings = JsonConvert.DeserializeObject<List<ModInfo>>(File.ReadAllText(dataPath));
+                if (appSettings == null) {
+                    return new List<ModInfo> { };
+                }
+                return appSettings;
+            } else {
+                return new List<ModInfo> { };
+            }
+        }
 
         public static ObservableCollection<ModInfo> GetModList() {
 

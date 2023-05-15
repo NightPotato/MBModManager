@@ -1,15 +1,14 @@
-﻿using ControlzEx.Standard;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using MBModManager.Data;
 using MBModManager.Events;
 using MBModManager.Handlers;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,16 +26,18 @@ namespace MBModManager
         private ObservableCollection<ModInfo> modList;
         private ObservableCollection<ModInfo> depsList;
         private ObservableCollection<Tag> tagsList;
-        IsEnabledState _modEnabledState;
+        private IsEnabledState _modEnabledState;
+        public List<ModInfo> InstalledMods; 
 
         public MainWindow() {
             
             // Load Application Settings
             clientSettings = DataHandler.LoadAppSettings();
+            InstalledMods = DataHandler.LoadInstalledMods();
             modList = new ObservableCollection<ModInfo>();
             depsList = new ObservableCollection<ModInfo>();
             tagsList = new ObservableCollection<Tag>();
-            //APIHandler.GetAllMods(this);
+            APIHandler.GetAllMods(this);
             _modEnabledState = new IsEnabledState(false);
 
             InitializeComponent();
@@ -182,7 +183,6 @@ namespace MBModManager
 
             // Setup Dialog Controller
             MetroDialogSettings dialogSettings = new MetroDialogSettings();
-            dialogSettings.ColorScheme = MetroDialogColorScheme.Inverted;
             var controller = await this.ShowProgressAsync("Installing Mod!", "Moving Mod to working-directory.", false, dialogSettings);
             controller.SetProgressBarForegroundBrush(new SolidColorBrush(Color.FromRgb(71, 125, 17)));
 
@@ -292,11 +292,19 @@ namespace MBModManager
                 // Make exception for patcher files. Currently no released mods use a patcher so can't test this with a real install.
                 File.Copy(pluginPath, clientSettings.GamePath + "\\BepInEx\\plugins\\" + _fileName);
             }
+
+            // Copy AssetBundles to BepInEx/plugins in their correct folders.
+
             ModToInstall.isInstalled = true;
+            InstalledMods.Add(ModToInstall);
             modList.Add(ModToInstall);
             controller.SetProgress(0.40);
             await Task.Delay(500);
 
+            // Save Installed Mods To File.
+            DataHandler.SaveInstalledMods(InstalledMods);
+
+            // Refresh Mod List
             modList.Clear();
             APIHandler.GetAllMods(this);
 
