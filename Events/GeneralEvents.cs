@@ -18,18 +18,12 @@ internal static class GeneralEvents {
     }
 
     public static async void GameLaunchFailed(MainWindow mv) {
-        var dialogSettings = new MetroDialogSettings
-        {
-            ColorScheme = MetroDialogColorScheme.Inverted
-        };
+        var dialogSettings = new MetroDialogSettings();
         await mv.ShowMessageAsync("Game Launch Failed!", "Something went wrong on our end. Please report this issue on github.", MessageDialogStyle.Affirmative, dialogSettings);
     }
 
     public static async void GameLaunchMissingMods(MainWindow mv, string[] missingMods) {
-        var dialogSettings = new MetroDialogSettings
-        {
-            ColorScheme = MetroDialogColorScheme.Inverted
-        };
+        var dialogSettings = new MetroDialogSettings();
 
         // Format Missing Mods list
         const string missingModsOutput = "[]";
