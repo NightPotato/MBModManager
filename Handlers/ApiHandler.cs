@@ -6,9 +6,9 @@ namespace MBModManager.Handlers;
 
 internal static class ApiHandler
 {
-    public static async Task<ModInfo[]> GetAllMods()
+    public static ModInfo[] GetAllMods()
     {
-        var response = await WebHandler.GetJson<ModInfo[]>(Constants.ModsUrl);
+        var response = WebHandler.GetJson<ModInfo[]>(Constants.ModsUrl).Result;
         return response ?? Array.Empty<ModInfo>();
     }
 

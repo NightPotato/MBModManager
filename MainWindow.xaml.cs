@@ -35,8 +35,8 @@ public partial class MainWindow
 
 
         // Get all mods from API and add them to the ModList
-        Task<ModInfo[]> mods = ApiHandler.GetAllMods();
-        foreach (ModInfo mod in mods.Result)
+        ModInfo[] mods = ApiHandler.GetAllMods();
+        foreach (ModInfo mod in mods)
         {
             if (ModList.Contains(mod)) return;
             ModList.Add(mod);
@@ -67,8 +67,7 @@ public partial class MainWindow
 
         if (!SearchTextBox.Text.StartsWith("@") || string.IsNullOrWhiteSpace(modInfo.Author))
         {
-            return string.IsNullOrWhiteSpace(modInfo.Name) ||
-                   modInfo.Name.Contains(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase);
+            return string.IsNullOrWhiteSpace(modInfo.Name) || modInfo.Name.Contains(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase);
         }
 
         var searchBy = SearchTextBox.Text.TrimStart('@');
@@ -148,7 +147,7 @@ public partial class MainWindow
 
         ModList.Clear();
 
-        foreach (var mod in mods.Result)
+        foreach (var mod in mods)
         {
             if (ModList.Contains(mod)) continue;
             ModList.Add(mod);

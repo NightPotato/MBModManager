@@ -202,7 +202,7 @@ internal static class InstallEvents
         // Refresh Mod List
         mv.ModList.Clear();
         var mods = ApiHandler.GetAllMods();
-        foreach (ModInfo mod in mods.Result)
+        foreach (ModInfo mod in mods)
         {
             if (mv.ModList.Contains(mod)) return;
             mv.ModList.Add(mod);
