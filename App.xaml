@@ -11,6 +11,22 @@
                 <!-- Theme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <Style x:Key="MainButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.Square}">
+                <Setter Property="Background" Value="#FF477D11"/>
+                <Setter Property="BorderBrush" Value="#FF477D11"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FF235811"/>
+                        <Setter Property="BorderBrush" Value="#FF235811"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="InfoButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.Square}">
+                <Setter Property="Background" Value="#FF5A5A5A"/>
+                <Setter Property="BorderBrush" Value="#FF5A5A5A"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
