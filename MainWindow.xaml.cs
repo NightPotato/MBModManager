@@ -26,7 +26,8 @@ namespace MBModManager
             
             // Load Application Settings
             clientSettings = DataHandler.LoadAppSettings();
-            modList = DataHandler.GetModList();
+            modList = new ObservableCollection<ModInfo>();
+            APIHandler.GetAllMods(this);
 
             InitializeComponent();
             installedMods.ItemsSource = modList;
@@ -39,6 +40,7 @@ namespace MBModManager
             get {
                 return modList;
             }
+            set { modList = value; }
         }
 
         //
@@ -85,6 +87,11 @@ namespace MBModManager
         private void bepinex_Install_btn_Click(object sender, RoutedEventArgs e) {
             InstallEvents.BIX_INSTALL(this);
         }
+
+        private void refresh_API_Btn_Click(object sender, RoutedEventArgs e) {
+            APIHandler.RefreshModList(this);
+        }
+
 
         // Drag-n-Drop Enter Check
         private void mod_install_box_DragEnter(object sender, DragEventArgs e) {
@@ -198,7 +205,6 @@ namespace MBModManager
             await controller.CloseAsync();
 
         }
-
     }
 
 
