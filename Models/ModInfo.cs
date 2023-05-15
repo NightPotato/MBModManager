@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace MBModManager.Models {
 
@@ -9,10 +10,13 @@ namespace MBModManager.Models {
         public string? Image { get; set; }
         public string? Author { get; set; }
         public int? NexusId { get; set; }
+        [JsonPropertyName("isEnabled")]
         public bool IsEnabled { get; set; }
+        [JsonPropertyName("isInstalled")]
         public bool IsInstalled { get; set; }
         public Tag[]? Tags { get; set; }
         public ModInfo[]? DependsOn { get; set; }
+        [JsonPropertyName("depends_on")]
         public List<string>? ModFiles { get; set; }
 
 

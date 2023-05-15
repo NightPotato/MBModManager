@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace MBModManager.Handlers
 {
-    class IsEnabledState : INotifyPropertyChanged {
+    internal sealed class IsEnabledState : INotifyPropertyChanged {
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private bool _enabled;
         
@@ -23,7 +23,7 @@ namespace MBModManager.Handlers
             this.Enabled = c;
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
             PropertyChangedEventHandler handler = PropertyChanged;
 
             if (handler != null) {

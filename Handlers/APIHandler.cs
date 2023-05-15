@@ -1,12 +1,8 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using Newtonsoft.Json;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MBModManager.Models;
 
 namespace MBModManager.Handlers {
-    internal class APIHandler {
+    internal static class APIHandler {
 
         public static async void GetAllMods(MainWindow mv) {
             var response = await WebHandler.GetJson<ModInfo[]>(InternalData.ModsUrl);
