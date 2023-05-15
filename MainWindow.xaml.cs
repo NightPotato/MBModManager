@@ -205,6 +205,15 @@ namespace MBModManager
             await controller.CloseAsync();
 
         }
+
+        private void installedMods_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
+            ModInfo selectedMod = installedMods.SelectedItem as ModInfo;
+            if (selectedMod == null) { return; }
+
+            ModInfo_Name.Text = selectedMod.Name;
+            ModInfo_Author.Text = selectedMod.Author;
+            modInfo_Desc.Text = selectedMod.Description;
+        }
     }
 
 
