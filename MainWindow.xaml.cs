@@ -25,7 +25,6 @@ namespace MBModManager
         private ObservableCollection<ModInfo> depsList;
         private ObservableCollection<Tag> tagsList;
         IsEnabledState _modEnabledState;
-        IsEnabledState _modInstalledState;
 
         public  MainWindow() {
             
@@ -36,7 +35,6 @@ namespace MBModManager
             tagsList = new ObservableCollection<Tag>();
             APIHandler.GetAllMods(this);
             _modEnabledState = new IsEnabledState(false);
-            _modInstalledState = new IsEnabledState(false);
 
             InitializeComponent();
 
