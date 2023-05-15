@@ -71,7 +71,7 @@
                         <iconPacks:PackIconModern Kind="DiskDownload" Foreground="#FFDADADA" Height="41" Width="65" HorizontalAlignment="Center" Margin="0,51,0,0"/>
                         <Label Content="Drop Mod.zip Here" Foreground="#FFC3C3C3" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,97,0,0"/>
                     </Grid>
-                    <Button x:Name="LaunchGame_btn" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Height="48" Style="{StaticResource MainButton}" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame_btn_Click"/>
+                    <Button x:Name="LaunchGame_btn" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Height="48" Style="{StaticResource MainButton}" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGameBtnClick"/>
                     <Button x:Name="bepinex_Install_btn" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BepInExInstallBtnClick"/>
                     <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0" BorderThickness="1,1,1,0">
                         <Canvas Margin="0,0,0,30">
@@ -150,7 +150,7 @@
                 <!-- Options Section -->
             </TabItem>
             <TabItem Header="Options">
-                <Canvas x:Name="Options_Section" Loaded="Options_Section_Loaded" RenderTransformOrigin="0.423,0.601">
+                <Canvas x:Name="Options_Section" Loaded="OptionsSectionLoaded" RenderTransformOrigin="0.423,0.601">
                     <Label Content="Game Directory&#xA;" Canvas.Top="9.999" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6"/>
                     <TextBox x:Name="GamePathBox" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="54.263" Width="1097" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF292929" BorderBrush="#FF477D11" Foreground="Gray"/>
                     <Button x:Name="setGamePath" Content="SET" Canvas.Left="1112" Canvas.Top="54.263" HorizontalAlignment="Center" VerticalAlignment="Center" Width="72" Style="{StaticResource MainButton}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetGamePath" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
