@@ -12,10 +12,8 @@ namespace MBModManager.Events {
         public static async void BIX_INSTALL(MainWindow mv) {
             // Dialog Controller Setup
             MetroDialogSettings dialogSettings = new MetroDialogSettings();
-            dialogSettings.ColorScheme = MetroDialogColorScheme.Inverted;
             var controller = await mv.ShowProgressAsync("Please wait...", "Downloading BepInEx from Github Releases.", false, dialogSettings);
             controller.SetProgressBarForegroundBrush(new System.Windows.Media.SolidColorBrush(Color.FromRgb(71, 125, 17)));
-
 
             // Setup WorkDir for Opterations
             string workDir = System.AppDomain.CurrentDomain.BaseDirectory + "\\workDir";
@@ -32,7 +30,6 @@ namespace MBModManager.Events {
             }
 
             // GetLatestRelease from Github
-            await Task.Delay(2000);
             string zipPath = workDir + "BepInEx.zip";
             using (var client = new HttpClient()) {
                 controller.SetProgress(0.25f);
@@ -43,7 +40,6 @@ namespace MBModManager.Events {
             }
 
             // Unzip Release in GamePath
-            await Task.Delay(2000);
             controller.SetMessage("Installing BepInEx to Game Directory.");
             controller.SetProgress(0.45f);
 
@@ -55,15 +51,12 @@ namespace MBModManager.Events {
             }
 
             // Delete BepInEx.zip from AppDirectory
-            await Task.Delay(2000);
             controller.SetMessage("Cleaning up install files.");
             File.Delete(zipPath);
             controller.SetProgress(0.65f);
 
 
             // Close Install Progress.
-            await Task.Delay(2000);
-
             controller.SetProgress(0.99999999999f);
             controller.SetTitle("Success!");
             controller.SetMessage("We successfully installed BepInEx. Please start the game and finish generating all of BepInEx folders, then you can freely install mods in your game.");
