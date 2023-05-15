@@ -21,26 +21,48 @@ namespace MBModManager
 
         public Settings clientSettings;
         private ObservableCollection<ModInfo> modList;
+        private ObservableCollection<ModInfo> depsList;
+        private ObservableCollection<Tag> tagsList;
 
         public  MainWindow() {
             
             // Load Application Settings
             clientSettings = DataHandler.LoadAppSettings();
             modList = new ObservableCollection<ModInfo>();
+            depsList = new ObservableCollection<ModInfo>();
+            tagsList = new ObservableCollection<Tag>();
             APIHandler.GetAllMods(this);
 
             InitializeComponent();
             installedMods.ItemsSource = modList;
             installedMods.DataContext = this;
 
+            modInfo_Deps.ItemsSource = depsList;
+            modInfo_Deps.DataContext = this;
+
+            ModInfo_Tags.ItemsSource = tagsList;
+            ModInfo_Tags.DataContext = tagsList;
+
+
         }
 
+
+        public ObservableCollection<ModInfo> DepsList {
+            get {
+                return depsList;
+            }
+        }
 
         public ObservableCollection<ModInfo> ModList {
             get {
                 return modList;
             }
-            set { modList = value; }
+        }
+
+        public ObservableCollection<Tag> TagsList {
+            get {
+                return tagsList;
+            }
         }
 
         //
@@ -72,6 +94,7 @@ namespace MBModManager
         //
 
         private void openMBModding(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://mods-monbazou.amenofisch.dev"); }
+
         private void checkUpdates(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://github.com/NightPotato/MBModManager"); }
 
         private void LaunchGame_btn_Click(object sender, RoutedEventArgs e) {
@@ -213,6 +236,21 @@ namespace MBModManager
             ModInfo_Name.Text = selectedMod.Name;
             ModInfo_Author.Text = selectedMod.Author;
             modInfo_Desc.Text = selectedMod.Description;
+
+            if (selectedMod.Tags != null) {
+                tagsList.Clear();
+                foreach (var tag in selectedMod.Tags) {
+                    tagsList.Add(tag);
+                }
+            }
+
+            if (selectedMod.depends_on != null) {
+                depsList.Clear();
+                foreach (var dep in selectedMod.depends_on) {
+                    depsList.Add(dep);
+                }
+            }
+
         }
     }
 

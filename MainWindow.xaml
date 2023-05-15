@@ -77,19 +77,25 @@
                     <Button x:Name="bepinex_Install_btn" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="bepinex_Install_btn_Click"/>
                     <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0">
                         <Canvas Margin="0,0,0,30">
-                            <ListView x:Name="modInfo_Deps" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="361" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="10" Canvas.Top="159">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn/>
-                                    </GridView>
-                                </ListView.View>
+                            <ListView x:Name="modInfo_Deps" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="361" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="10" Canvas.Top="159" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Canvas Height="33" Margin="0,0,0,2">
+                                            <Rectangle Height="33" Width="361" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
+                                            <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="-2"/>
+                                        </Canvas>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
                             </ListView>
-                            <ListView x:Name="ModInfo_Tags" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" Width="188" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="376" Canvas.Top="159" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn/>
-                                    </GridView>
-                                </ListView.View>
+                            <ListView x:Name="ModInfo_Tags" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" Width="188" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="376" Canvas.Top="159" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Canvas Height="33" Margin="0,0,0,2">
+                                                <Rectangle Height="33" Width="361" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
+                                                <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="-2"/>
+                                            </Canvas>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
                             </ListView>
                             <Button x:Name="ModInfo_enabledStatus" Canvas.Left="356.984" Canvas.Top="5" Width="207" Style="{StaticResource MahApps.Styles.Button.Square}" Height="60" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF5A5A5A" BorderBrush="#FF5A5A5A" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Disabled" RenderTransformOrigin="0.5,0.5">
                                 <Button.RenderTransform>

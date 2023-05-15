@@ -32,16 +32,16 @@ namespace MBModManager.Data {
     }
 
     public class Tag {
-        public int? id { get; set; }
+        public int? Id { get; set; }
         public string? Name { get; set; }
-        public string? color { get; set; }
-        public string? uuid { get; set; }
+        public string? Color { get; set; }
+        public string? UUID { get; set; }
 
-        public Tag (int? id, string? name, string? color, string? uuid) {
-            this.id = id;
-            Name = name;
-            this.color = color;
-            this.uuid = uuid;
+        public Tag (int? id, string? text, string? color, string? uuid) {
+            Id = id;
+            Name = text;
+            Color = color;
+            UUID = uuid;
         }
     }
 
