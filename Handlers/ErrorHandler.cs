@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
+using MBModManager.Events;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -23,12 +24,7 @@ namespace MBModManager.Handlers
             controller.SetProgress(1f);
             controller.SetTitle("Opps. Mod Install Failed!");
             controller.SetMessage(message);
-
-            if (shouldCleanUp)
-            {
-                // We need to remove any files that were attempted to be installed before the error occoured.
-            }
-
+            if (shouldCleanUp) { GeneralEvents.CLEANUP_WORKDIR(); }
             await Task.Delay(5000);
             await controller.CloseAsync();
         }
