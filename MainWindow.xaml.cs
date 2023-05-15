@@ -74,7 +74,12 @@ namespace MBModManager
             if (string.IsNullOrEmpty(search_box.Text)) {
                 return true;
             } else {
-                return ((item as ModInfo).Name.IndexOf(search_box.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                if (search_box.Text.StartsWith("@")) {
+                    string searchBy = search_box.Text.Trim(new char[] { '@' });
+                    return ((item as ModInfo).Author.IndexOf(searchBy, StringComparison.OrdinalIgnoreCase) >= 0);
+                } else {
+                    return ((item as ModInfo).Name.IndexOf(search_box.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                }
             }
         }
 
