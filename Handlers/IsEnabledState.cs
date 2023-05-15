@@ -1,35 +1,38 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MBModManager.Handlers
-{
-    internal sealed class IsEnabledState : INotifyPropertyChanged {
+namespace MBModManager.Handlers;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+internal sealed class IsEnabledState : INotifyPropertyChanged {
 
-        private bool _enabled;
-        
-        public bool Enabled {
-            get { return _enabled; }
-            set { _enabled = value; OnPropertyChanged(); }
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private bool _enabled;
+
+    public bool Enabled
+    {
+        get => _enabled;
+        set {
+            _enabled = value;
+            OnPropertyChanged();
+
         }
+    }
 
-        public void Set(bool newState) {
-            Enabled = newState;
-        }
+    public void Set(bool newState)
+    {
+        Enabled = newState;
+    }
 
-        public IsEnabledState(bool c) {
-            this.Enabled = c;
-        }
+    public IsEnabledState(bool c)
+    {
+        Enabled = c;
+    }
 
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-            PropertyChangedEventHandler handler = PropertyChanged;
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        var handler = PropertyChanged;
 
-            if (handler != null) {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
+        handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
