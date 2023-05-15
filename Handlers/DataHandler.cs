@@ -13,7 +13,7 @@ namespace MBModManager.Handlers
         public static Settings LoadAppSettings()
         {
 
-            string confPath = System.AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
+            string confPath = AppDomain.CurrentDomain.BaseDirectory + "/settings.json";
             if (File.Exists(confPath))
             {
                 Settings appSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(confPath));
@@ -63,7 +63,7 @@ namespace MBModManager.Handlers
 
             var modList = new ObservableCollection<ModInfo>();
             for (int i = 0; i < 50; i++) {
-                modList.Add(new ModInfo("Failed to Get Mod List", "If you see this message, please try again later.", "PotatDev180#1911"));
+                modList.Add(new ModInfo(1, "Failed to Get Mod List", "If you see this message, please try again later.", "", "PotatDev180#1911", 1, new Tag[] { }));
             }
 
 

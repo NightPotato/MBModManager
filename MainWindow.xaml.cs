@@ -5,6 +5,7 @@ using MBModManager.Events;
 using MBModManager.Handlers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -21,25 +22,49 @@ namespace MBModManager
 
         public Settings clientSettings;
         private ObservableCollection<ModInfo> modList;
+        private ObservableCollection<ModInfo> depsList;
+        private ObservableCollection<Tag> tagsList;
+        IsEnabledState _modEnabledState;
+        IsEnabledState _modInstalledState;
 
         public  MainWindow() {
             
             // Load Application Settings
             clientSettings = DataHandler.LoadAppSettings();
-            modList = DataHandler.GetModList();
+            modList = new ObservableCollection<ModInfo>();
+            depsList = new ObservableCollection<ModInfo>();
+            tagsList = new ObservableCollection<Tag>();
+            APIHandler.GetAllMods(this);
+            _modEnabledState = new IsEnabledState(false);
+            _modInstalledState = new IsEnabledState(false);
 
             InitializeComponent();
+
             installedMods.ItemsSource = modList;
             installedMods.DataContext = this;
 
+            modInfo_Deps.ItemsSource = depsList;
+            modInfo_Deps.DataContext = this;
+
+            ModInfo_Tags.ItemsSource = tagsList;
+            ModInfo_Tags.DataContext = this;
+
+            ModInfo_enabledStatus.DataContext = _modEnabledState;
         }
 
+
+        public ObservableCollection<ModInfo> DepsList {
+            get { return depsList; }
+        }
 
         public ObservableCollection<ModInfo> ModList {
-            get {
-                return modList;
-            }
+            get { return modList; }
         }
+
+        public ObservableCollection<Tag> TagsList {
+            get { return tagsList; }
+        }
+
 
         //
         // Options Section Events
@@ -70,6 +95,7 @@ namespace MBModManager
         //
 
         private void openMBModding(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://mods-monbazou.amenofisch.dev"); }
+
         private void checkUpdates(object sender, RoutedEventArgs e) { GeneralEvents.OPEN_WEB("https://github.com/NightPotato/MBModManager"); }
 
         private void LaunchGame_btn_Click(object sender, RoutedEventArgs e) {
@@ -85,6 +111,11 @@ namespace MBModManager
         private void bepinex_Install_btn_Click(object sender, RoutedEventArgs e) {
             InstallEvents.BIX_INSTALL(this);
         }
+
+        private void refresh_API_Btn_Click(object sender, RoutedEventArgs e) {
+            APIHandler.RefreshModList(this);
+        }
+
 
         // Drag-n-Drop Enter Check
         private void mod_install_box_DragEnter(object sender, DragEventArgs e) {
@@ -196,6 +227,32 @@ namespace MBModManager
             controller.SetProgress(0.99999);
             await Task.Delay(5000);
             await controller.CloseAsync();
+
+        }
+
+        private void installedMods_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
+            ModInfo selectedMod = installedMods.SelectedItem as ModInfo;
+            if (selectedMod == null) { return; }
+
+            ModInfo_Name.Text = selectedMod.Name;
+            ModInfo_Author.Text = selectedMod.Author;
+            modInfo_Desc.Text = selectedMod.Description;
+
+            _modEnabledState.Set(selectedMod.isEnabled);
+
+            if (selectedMod.Tags != null) {
+                tagsList.Clear();
+                foreach (var tag in selectedMod.Tags) {
+                    tagsList.Add(tag);
+                }
+            }
+
+            if (selectedMod.depends_on != null) {
+                depsList.Clear();
+                foreach (var dep in selectedMod.depends_on) {
+                    depsList.Add(dep);
+                }
+            }
 
         }
 

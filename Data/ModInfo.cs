@@ -1,30 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MBModManager.Data {
 
     public class ModInfo {
+        public int? Id {  get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public string? Image { get; set; }
         public string? Author { get; set; }
-        public bool? isEnabled { get; set; }
-        public bool? isInstalled { get; set; }
-        public string[]? Tags { get; set; }
-        public string[]? depends_on { get; set; }
+        public int? NexusId { get; set; }
+        public bool isEnabled { get; set; }
+        public bool isInstalled { get; set; }
+        public Tag[]? Tags { get; set; }
+        public ModInfo[]? depends_on { get; set; }
         public string[]? ModFiles { get; set; }
 
 
-        public ModInfo(string modName, string desc, string auth) {
+        public ModInfo(int id, string modName, string desc, string image, string auth, int NexusModId, Tag[] tags) {
+            Id = id;
             Name = modName;
             Description = desc;
+            Image = image;
             Author = auth;
-            Tags = new string[] { };
-            depends_on = new string[] { };
+            NexusId = NexusModId;
+            isEnabled = false;
+            isInstalled = false;
+            Tags = tags;
+            depends_on = new ModInfo[] { };
             ModFiles = new string[] { };
         }
     }
+
+    public class Tag {
+        public int? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Color { get; set; }
+        public string? UUID { get; set; }
+
+        public Tag (int? id, string? text, string? color, string? uuid) {
+            Id = id;
+            Name = text;
+            Color = color;
+            UUID = uuid;
+        }
+    }
+
 
 }

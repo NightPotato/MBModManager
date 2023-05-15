@@ -11,8 +11,6 @@
                  WindowStartupLocation="CenterScreen"
                  mc:Ignorable="d" mah:ControlsHelper.ContentCharacterCasing="Upper" ResizeMode="NoResize" ResizeBorderThickness="6,0,6,6" BorderThickness="1,0,1,1" SnapsToDevicePixels="True">
 
-
-
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Button Click="openMBModding" ToolTip="Open Mon-Bazou Modding Site">
@@ -46,8 +44,8 @@
     <Grid Background="#FF1B1B1B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200*"/>
-            <ColumnDefinition Width="753*"/>
-            <ColumnDefinition Width="248*"/>
+            <ColumnDefinition Width="748"/>
+            <ColumnDefinition Width="250.5"/>
         </Grid.ColumnDefinitions>
 
 
@@ -56,14 +54,14 @@
             <TabItem Header="Mods">
                 <Canvas>
                     <Label Content="Mod List" Canvas.Top="14.999" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="253.45"/>
-                    <ListView x:Name="installedMods" ItemsSource="{Binding ModList}"  Height="623" Width="581" HorizontalAlignment="Center" Canvas.Top="89.262" VerticalAlignment="Top" Canvas.Left="10" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" SelectionMode="Single">
+                    <ListView x:Name="installedMods" ItemsSource="{Binding ModList}"  Height="623" Width="581" HorizontalAlignment="Center" Canvas.Top="89.262" VerticalAlignment="Top" Canvas.Left="10" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" SelectionMode="Single" SelectionChanged="installedMods_SelectionChanged_1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Canvas Height="55" Margin="0,0,0,8">
                                     <Rectangle Height="60" Width="581" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
                                     <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Canvas.Left="10" Canvas.Top="4"/>
-                                    <Label Content="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Foreground="#FF868686" Canvas.Top="30" Panel.ZIndex="0" Canvas.Left="15"/>
-                                    <Button Content="Not Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF848484" BorderBrush="#FF848484" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Canvas.Left="425" Canvas.Top="15"/>
+                                    <Label Content="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" Foreground="#FF868686" Canvas.Top="30" Panel.ZIndex="0" Canvas.Left="15" Width="NaN" MaxWidth="400"/>
+                                    <Button Content="Not Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Style="{StaticResource InfoButton}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Canvas.Left="425" Canvas.Top="15"/>
                                 </Canvas>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -73,16 +71,69 @@
                         <iconPacks:PackIconModern Kind="DiskDownload" Foreground="#FFDADADA" Height="41" Width="65" HorizontalAlignment="Center" Margin="0,51,0,0"/>
                         <Label Content="Drop Mod.zip Here" Foreground="#FFC3C3C3" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,97,0,0"/>
                     </Grid>
-                    <Button x:Name="LaunchGame_btn" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame_btn_Click"/>
-                    <Button x:Name="bepinex_Install_btn" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="bepinex_Install_btn_Click"/>
-                    <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0"/>
-                    <Button x:Name="refresh_API_Btn" Content="{iconPacks:Modern Kind=Refresh}" Canvas.Left="559" Canvas.Top="54.263" Width="31" Style="{StaticResource MahApps.Styles.Button.Square}" Height="29" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="LaunchGame_btn" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Height="48" Style="{StaticResource MainButton}" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame_btn_Click"/>
+                    <Button x:Name="bepinex_Install_btn" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="bepinex_Install_btn_Click"/>
+                    <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0" BorderThickness="1,1,1,0">
+                        <Canvas Margin="0,0,0,30">
+                            <ListView x:Name="modInfo_Deps" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="361" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="10" Canvas.Top="159" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Canvas Height="33" Margin="0,0,0,2">
+                                            <Rectangle Height="33" Width="361" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
+                                            <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="-2"/>
+                                        </Canvas>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <ListView x:Name="ModInfo_Tags" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" Width="188" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="376" Canvas.Top="159" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Canvas Height="33" Margin="0,0,0,2">
+                                            <Rectangle Height="33" Width="188" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#FF151515" Margin="-5,-1,0,0"/>
+                                            <Label Content="{Binding Name}" Foreground="#FFD6D6D6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Canvas.Left="10" Canvas.Top="-2"/>
+                                        </Canvas>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <Button x:Name="ModInfo_enabledStatus" Canvas.Left="356.984" Canvas.Top="5" Width="207" Height="60" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource InfoButton}">
+                                        <Setter Property="Content" Value="{Binding Enabled}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Enabled}" Value="true">
+                                                <Setter Property="Content" Value="Enabled"/>
+                                                <Setter Property="Background" Value="#FF235811"/>
+                                                <Setter Property="BorderBrush" Value="#FF235811"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Rectangle Height="27" Canvas.Left="74.99" Canvas.Top="5.5" Width="277" Fill="#CC0E0E0E" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="#CC60A917"/>
+                            <Rectangle Height="27" Canvas.Left="10" Canvas.Top="132" Width="361" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#CC60A917"/>
+                            <Rectangle Height="27" Canvas.Left="376" Canvas.Top="132" Width="188" Fill="#CC60A917" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Rectangle Height="27" Canvas.Left="10" Canvas.Top="5.5" Width="65" Fill="#CC60A917" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="#CC60A917"/>
+                            <Rectangle Height="27" Canvas.Left="74.99" Canvas.Top="38" Width="277" Fill="#CC0E0E0E" Stroke="#CC60A917" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Height="27" Canvas.Left="10" Canvas.Top="38" Width="65" Fill="#CC60A917" Stroke="#CC60A917" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Rectangle Height="18" Canvas.Left="10" Canvas.Top="71" Width="554" Fill="#CC60A917" Stroke="#CC60A917" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Rectangle Height="39" Canvas.Left="10" Canvas.Top="89" Width="554" Fill="#CC0E0E0E" Stroke="#CC60A917" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Label Content="Name:" Canvas.Left="11" Canvas.Top="3" FontSize="14" Height="27" Width="56" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Label Content="Dependencies:" Canvas.Left="17.106" Canvas.Top="130.5" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29"/>
+                            <Label Content="Tags:" Canvas.Left="383.106" Canvas.Top="130.5" FontSize="14" Height="29" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Label Content="Author:" Canvas.Left="11" Canvas.Top="36" FontSize="14" Height="27" Width="58" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Label Content="Description:" Canvas.Left="11" Canvas.Top="65" FontSize="14" Height="27" Width="94" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="modInfo_Desc" Canvas.Left="13.5" TextWrapping="Wrap" Canvas.Top="92" Height="33" Width="549" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10" FontStyle="Italic" FontWeight="Bold"/>
+                            <TextBlock x:Name="ModInfo_Name" Canvas.Left="79.99" TextWrapping="Wrap" Canvas.Top="11.5" Height="15" Width="272" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10" FontWeight="Bold"/>
+                            <TextBlock x:Name="ModInfo_Author" Canvas.Left="80" TextWrapping="Wrap" Canvas.Top="44" Height="15" Width="272" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic"/>
+                        </Canvas>
+                    </GroupBox>
+                    <Button x:Name="refresh_API_Btn" Content="{iconPacks:Modern Kind=Refresh}" Canvas.Left="559" Canvas.Top="54.263" Width="31" Style="{StaticResource MainButton}" Height="29" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" Click="refresh_API_Btn_Click"/>
                     <TextBox Canvas.Left="10" TextWrapping="Wrap" Text="Search" Canvas.Top="54.263" Width="518" HorizontalAlignment="Left" Height="29" VerticalAlignment="Center" BorderBrush="#FF477D11" CaretBrush="#FFB7B1B1" Foreground="#FFB7B1B1" Background="#FF101010"/>
-                    <Button x:Name="search_btn" Content="{iconPacks:Modern Kind=Magnify}" Canvas.Left="528" Canvas.Top="54.263" Width="31" Style="{StaticResource MahApps.Styles.Button.Square}" Height="29" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Button x:Name="install_Mod_Btn" Content="{iconPacks:Modern Kind=Add}" Canvas.Left="598" Canvas.Top="621.257" Width="146" Style="{StaticResource MahApps.Styles.Button.Square}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button x:Name="uninstall_Mod_Btn" Content="{iconPacks:Modern Kind=Delete}" Canvas.Left="743.992" Canvas.Top="621.257" Width="146" Style="{StaticResource MahApps.Styles.Button.Square}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button x:Name="update_Mod_Btn" Content="{iconPacks:Modern Kind=CloudDownload}" Canvas.Left="890.004" Canvas.Top="621.255" Width="146" Style="{StaticResource MahApps.Styles.Button.Square}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button x:Name="toggle_Active_Btn" Content="{iconPacks:Modern Kind=ConfirmYesNo}" Canvas.Left="1036.004" Canvas.Top="621.128" Width="146" Style="{StaticResource MahApps.Styles.Button.Square}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="search_btn" Content="{iconPacks:Modern Kind=Magnify}" Canvas.Left="528" Canvas.Top="54.263" Width="31" Style="{StaticResource MainButton}" Height="29" FontWeight="Bold" FontFamily="Bahnschrift"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button x:Name="install_Mod_Btn" Content="{iconPacks:Modern Kind=Add}" Canvas.Left="598" Canvas.Top="622.092" Width="146" Style="{StaticResource MainButton}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="uninstall_Mod_Btn" Content="{iconPacks:Modern Kind=Delete}" Canvas.Left="743.992" Canvas.Top="622.092" Width="146" Style="{StaticResource MainButton}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="update_Mod_Btn" Content="{iconPacks:Modern Kind=CloudDownload}" Canvas.Left="890.004" Canvas.Top="622.09" Width="146" Style="{StaticResource MainButton}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="toggle_Active_Btn" Content="{iconPacks:Modern Kind=ConfirmYesNo}" Canvas.Left="1036.004" Canvas.Top="621.963" Width="146" Style="{StaticResource MainButton}" Height="31" FontWeight="Bold" FontFamily="Bahnschrift"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 </Canvas>
             </TabItem>
@@ -102,15 +153,15 @@
                 <Canvas x:Name="Options_Section" Loaded="Options_Section_Loaded" RenderTransformOrigin="0.423,0.601">
                     <Label Content="Game Directory&#xA;" Canvas.Top="9.999" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6"/>
                     <TextBox x:Name="GamePathBox" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="54.263" Width="1097" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF292929" BorderBrush="#FF477D11" Foreground="Gray"/>
-                    <Button x:Name="setGamePath" Content="SET" Canvas.Left="1112" Canvas.Top="54.263" HorizontalAlignment="Center" VerticalAlignment="Center" Width="72" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetGamePath" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
+                    <Button x:Name="setGamePath" Content="SET" Canvas.Left="1112" Canvas.Top="54.263" HorizontalAlignment="Center" VerticalAlignment="Center" Width="72" Style="{StaticResource MainButton}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetGamePath" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper"/>
                     <Label Content="Game Saves Directory" Canvas.Top="89.999" Foreground="#FFC3C3C3" FontSize="22" Canvas.Left="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <TextBox x:Name="SavePathBox" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="134.263" Width="1097" Background="#FF292929" BorderBrush="#FF477D11" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <Button x:Name="setSavePath" Content="SET" Canvas.Left="1112" Canvas.Top="134.263" Width="72" Style="{StaticResource MahApps.Styles.Button.Square}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetSavePath" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Button x:Name="setSavePath" Content="SET" Canvas.Left="1112" Canvas.Top="134.263" Width="72" Style="{StaticResource MainButton}" Height="26" FontWeight="Bold" FontFamily="Bahnschrift" Click="SetSavePath"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Example: (C:\Program Files (x86)\Steam\steamapps\common\MonBazou)" Canvas.Left="172.48" Canvas.Top="19.302" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     <Label Content="Example: (C:\Users\Admin\AppData\LocalLow\Santa Goat\Mon Bazou)" Canvas.Left="232.76" Canvas.Top="100.789" Foreground="#FF717171" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <GroupBox Height="535" Header="Advanced Options (Don't Use if You have to Ask)" Width="386" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="179.263" RenderTransformOrigin="0,1"/>
-                    <Button x:Name="clear_workDir_btn" Content="clear working directory" Canvas.Left="17.067" Canvas.Top="659.596" Width="372" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Click="clear_workDir_btn_Click" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Button x:Name="uninstall_allMods_btn" Content="uninstall all mods" Canvas.Left="17.067" Canvas.Top="606.596" Width="372" Style="{StaticResource MahApps.Styles.Button.Square}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF477D11" BorderBrush="#FF477D11" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Button x:Name="clear_workDir_btn" Content="clear working directory" Canvas.Left="17.067" Canvas.Top="659.596" Width="372" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" Click="clear_workDir_btn_Click" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button x:Name="uninstall_allMods_btn" Content="uninstall all mods" Canvas.Left="17.067" Canvas.Top="606.596" Width="372" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift"  Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
                 </Canvas>
