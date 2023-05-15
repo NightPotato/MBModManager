@@ -5,6 +5,7 @@ using MBModManager.Events;
 using MBModManager.Handlers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -23,6 +24,8 @@ namespace MBModManager
         private ObservableCollection<ModInfo> modList;
         private ObservableCollection<ModInfo> depsList;
         private ObservableCollection<Tag> tagsList;
+        IsEnabledState _modEnabledState;
+        IsEnabledState _modInstalledState;
 
         public  MainWindow() {
             
@@ -32,8 +35,11 @@ namespace MBModManager
             depsList = new ObservableCollection<ModInfo>();
             tagsList = new ObservableCollection<Tag>();
             APIHandler.GetAllMods(this);
+            _modEnabledState = new IsEnabledState(false);
+            _modInstalledState = new IsEnabledState(false);
 
             InitializeComponent();
+
             installedMods.ItemsSource = modList;
             installedMods.DataContext = this;
 
@@ -41,29 +47,24 @@ namespace MBModManager
             modInfo_Deps.DataContext = this;
 
             ModInfo_Tags.ItemsSource = tagsList;
-            ModInfo_Tags.DataContext = tagsList;
+            ModInfo_Tags.DataContext = this;
 
-
+            ModInfo_enabledStatus.DataContext = _modEnabledState;
         }
 
 
         public ObservableCollection<ModInfo> DepsList {
-            get {
-                return depsList;
-            }
+            get { return depsList; }
         }
 
         public ObservableCollection<ModInfo> ModList {
-            get {
-                return modList;
-            }
+            get { return modList; }
         }
 
         public ObservableCollection<Tag> TagsList {
-            get {
-                return tagsList;
-            }
+            get { return tagsList; }
         }
+
 
         //
         // Options Section Events
@@ -237,6 +238,8 @@ namespace MBModManager
             ModInfo_Author.Text = selectedMod.Author;
             modInfo_Desc.Text = selectedMod.Description;
 
+            _modEnabledState.Set(selectedMod.isEnabled);
+
             if (selectedMod.Tags != null) {
                 tagsList.Clear();
                 foreach (var tag in selectedMod.Tags) {
@@ -252,6 +255,7 @@ namespace MBModManager
             }
 
         }
+
     }
 
 

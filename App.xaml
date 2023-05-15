@@ -26,6 +26,12 @@
             <Style x:Key="InfoButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.Square}">
                 <Setter Property="Background" Value="#FF5A5A5A"/>
                 <Setter Property="BorderBrush" Value="#FF5A5A5A"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FF5A5A5A"/>
+                        <Setter Property="BorderBrush" Value="#FF5A5A5A"/>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

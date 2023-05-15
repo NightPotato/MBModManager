@@ -9,8 +9,8 @@ namespace MBModManager.Data {
         public string? Image { get; set; }
         public string? Author { get; set; }
         public int? NexusId { get; set; }
-        public bool? isEnabled { get; set; }
-        public bool? isInstalled { get; set; }
+        public bool isEnabled { get; set; }
+        public bool isInstalled { get; set; }
         public Tag[]? Tags { get; set; }
         public ModInfo[]? depends_on { get; set; }
         public string[]? ModFiles { get; set; }

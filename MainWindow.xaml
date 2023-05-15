@@ -95,15 +95,19 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
-                            <Button x:Name="ModInfo_enabledStatus" Canvas.Left="356.984" Canvas.Top="5" Width="207" Style="{StaticResource InfoButton}" Height="60" FontWeight="Bold" FontFamily="Bahnschrift" Background="#FF5A5A5A" BorderBrush="#FF5A5A5A" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Disabled" RenderTransformOrigin="0.5,0.5">
-                                <Button.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform AngleX="-0.165"/>
-                                        <RotateTransform/>
-                                        <TranslateTransform X="-0.08"/>
-                                    </TransformGroup>
-                                </Button.RenderTransform>
+                            <Button x:Name="ModInfo_enabledStatus" Canvas.Left="356.984" Canvas.Top="5" Width="207" Height="60" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource InfoButton}">
+                                        <Setter Property="Content" Value="{Binding Enabled}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Enabled}" Value="true">
+                                                <Setter Property="Content" Value="Enabled"/>
+                                                <Setter Property="Background" Value="#FF235811"/>
+                                                <Setter Property="BorderBrush" Value="#FF235811"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                             </Button>
                             <Rectangle Height="27" Canvas.Left="74.99" Canvas.Top="5.5" Width="277" Fill="#CC0E0E0E" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="#CC60A917"/>
                             <Rectangle Height="27" Canvas.Left="10" Canvas.Top="132" Width="361" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#CC60A917"/>
