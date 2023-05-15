@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 
 namespace MBModManager.Data {
 
@@ -13,7 +13,7 @@ namespace MBModManager.Data {
         public bool isInstalled { get; set; }
         public Tag[]? Tags { get; set; }
         public ModInfo[]? depends_on { get; set; }
-        public string[]? ModFiles { get; set; }
+        public List<string>? ModFiles { get; set; }
 
 
         public ModInfo(int id, string modName, string desc, string image, string auth, int NexusModId, Tag[] tags) {
@@ -27,7 +27,7 @@ namespace MBModManager.Data {
             isInstalled = false;
             Tags = tags;
             depends_on = new ModInfo[] { };
-            ModFiles = new string[] { };
+            ModFiles = new List<string> { };
         }
     }
 
