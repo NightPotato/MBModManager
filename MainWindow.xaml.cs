@@ -1,6 +1,5 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using MBModManager.Data;
 using MBModManager.Events;
 using MBModManager.Handlers;
 using System;
@@ -14,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using MBModManager.Models;
 
 namespace MBModManager
 {
@@ -150,7 +150,7 @@ namespace MBModManager
             ModInfo_Author.Text = selectedMod.Author;
             modInfo_Desc.Text = selectedMod.Description;
 
-            _modEnabledState.Set(selectedMod.isEnabled);
+            _modEnabledState.Set(selectedMod.IsEnabled);
 
             if (selectedMod.Tags != null) {
                 tagsList.Clear();
@@ -159,9 +159,9 @@ namespace MBModManager
                 }
             }
 
-            if (selectedMod.depends_on != null) {
+            if (selectedMod.DependsOn != null) {
                 depsList.Clear();
-                foreach (var dep in selectedMod.depends_on) {
+                foreach (var dep in selectedMod.DependsOn) {
                     depsList.Add(dep);
                 }
             }
@@ -275,7 +275,7 @@ namespace MBModManager
             }
 
             // Get Copy of ModInfo of the mod we are installing.
-            ModInfo ModToInstall = await APIHandler.GetModByID(this, modId);
+            ModInfo modToInstall = await APIHandler.GetModById(modId);
             controller.SetProgress(0.34);
             await Task.Delay(500);
 
@@ -288,16 +288,16 @@ namespace MBModManager
             // Copy Mod in modDir to GamePath/BepInEx/
             foreach (string pluginPath in pluginsDlls) {
                 string _fileName = Path.GetFileName(pluginPath);
-                ModToInstall.ModFiles.Add(_fileName);
+                modToInstall.ModFiles?.Add(_fileName);
                 // Make exception for patcher files. Currently no released mods use a patcher so can't test this with a real install.
                 File.Copy(pluginPath, clientSettings.GamePath + "\\BepInEx\\plugins\\" + _fileName);
             }
 
             // Copy AssetBundles to BepInEx/plugins in their correct folders.
 
-            ModToInstall.isInstalled = true;
-            InstalledMods.Add(ModToInstall);
-            modList.Add(ModToInstall);
+            modToInstall.IsInstalled = true;
+            InstalledMods.Add(modToInstall);
+            modList.Add(modToInstall);
             controller.SetProgress(0.40);
             await Task.Delay(500);
 
@@ -309,7 +309,7 @@ namespace MBModManager
             APIHandler.GetAllMods(this);
 
             // Close Dialog Controller
-            controller.SetMessage("Successfully installed " + ModToInstall.Name + "!");
+            controller.SetMessage("Successfully installed " + modToInstall.Name + "!");
             controller.SetProgress(0.99999);
             GeneralEvents.CLEANUP_WORKDIR();
             await Task.Delay(5000);

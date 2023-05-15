@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using MBModManager.Models;
 
 namespace MBModManager.Events {
     internal class InstallEvents {
@@ -24,14 +25,8 @@ namespace MBModManager.Events {
                 Directory.CreateDirectory(workDir);
             }
 
-            // Verify Internal Data Exists
-            if (mv.clientSettings.InternalData == null || mv.clientSettings.InternalData.BepInExURL == null) {
-                Handlers.ErrorHandler.BIX_INSTALL_FAILED(controller, "Some of the applications internal data is missing, please delete settings.json and relaunch MBModManager.");
-                return;
-            }
-
             // Check if the GamePath is set in the Options.
-            if (mv.clientSettings.GamePath == null || mv.clientSettings.GamePath == "") {
+            if (string.IsNullOrEmpty(mv.clientSettings.GamePath)) {
                 Handlers.ErrorHandler.BIX_INSTALL_FAILED(controller, "The Game Path was not set in the options. Please set a Game Path before installing a BepInEx.");
                 return;
             }
@@ -41,7 +36,7 @@ namespace MBModManager.Events {
             string zipPath = workDir + "BepInEx.zip";
             using (var client = new HttpClient()) {
                 controller.SetProgress(0.25f);
-                var response = await client.GetByteArrayAsync(mv.clientSettings.InternalData.BepInExURL);
+                var response = await client.GetByteArrayAsync(InternalData.BepInExUrl);
                 File.WriteAllBytes(zipPath, response);
                 controller.SetProgress(0.35f);
                 controller.SetMessage("Finished Downloading BepInEx.");

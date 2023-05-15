@@ -1,11 +1,11 @@
-﻿using MBModManager.Data;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Documents;
+using MBModManager.Models;
 
 namespace MBModManager.Handlers
 {
