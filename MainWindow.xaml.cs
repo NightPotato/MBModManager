@@ -26,7 +26,6 @@ public partial class MainWindow
 
     public  MainWindow()
     {
-
         // Load Application Settings
         ClientSettings = DataHandler.LoadAppSettings();
         ModList = new ObservableCollection<ModInfo>();
