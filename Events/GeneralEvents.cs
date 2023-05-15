@@ -18,8 +18,7 @@ internal static class GeneralEvents {
     }
 
     public static async void GameLaunchFailed(MainWindow mv) {
-        var dialogSettings = new MetroDialogSettings();
-        await mv.ShowMessageAsync("Game Launch Failed!", "Something went wrong on our end. Please report this issue on github.", MessageDialogStyle.Affirmative, dialogSettings);
+        await mv.ShowMessageAsync("Game Launch Failed!", "Something went wrong on our end. Please report this issue on github.");
     }
 
     public static async void GameLaunchMissingMods(MainWindow mv, string[] missingMods) {
@@ -28,7 +27,7 @@ internal static class GeneralEvents {
         // Format Missing Mods list
         const string missingModsOutput = "[]";
 
-        await mv.ShowMessageAsync("Missing Required Mods", missingModsOutput, MessageDialogStyle.Affirmative, dialogSettings);
+        await mv.ShowMessageAsync("Missing Required Mods", missingModsOutput);
     }
 
     public static void CleanupWorkDir() {
