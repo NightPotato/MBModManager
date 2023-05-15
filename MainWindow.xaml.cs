@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using MBModManager.Data;
 using MBModManager.Events;
 using MBModManager.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,6 +12,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace MBModManager
@@ -48,6 +51,10 @@ namespace MBModManager
             ModInfo_Tags.DataContext = this;
 
             ModInfo_enabledStatus.DataContext = _modEnabledState;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(installedMods.ItemsSource);
+            view.Filter = SearchFilter;
+
         }
 
 
@@ -61,6 +68,19 @@ namespace MBModManager
 
         public ObservableCollection<Tag> TagsList {
             get { return tagsList; }
+        }
+
+        private bool SearchFilter(object item) {
+            if (string.IsNullOrEmpty(search_box.Text)) {
+                return true;
+            } else {
+                if (search_box.Text.StartsWith("@")) {
+                    string searchBy = search_box.Text.Trim(new char[] { '@' });
+                    return ((item as ModInfo).Author.IndexOf(searchBy, StringComparison.OrdinalIgnoreCase) >= 0);
+                } else {
+                    return ((item as ModInfo).Name.IndexOf(search_box.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                }
+            }
         }
 
 
@@ -105,6 +125,12 @@ namespace MBModManager
         //
         // Mods Section Events
         //
+
+        private void search_box_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e) {
+            if (installedMods.ItemsSource != null) {
+                CollectionViewSource.GetDefaultView(installedMods.ItemsSource).Refresh();
+            }
+        }
 
         private void bepinex_Install_btn_Click(object sender, RoutedEventArgs e) {
             InstallEvents.BIX_INSTALL(this);
