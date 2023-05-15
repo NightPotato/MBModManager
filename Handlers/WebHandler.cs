@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 
 namespace MBModManager.Handlers;
 
-public class WebHandler
+public static class WebHandler
 {
     public static async Task<T?> GetJson<T>(string url)
     {
-        using HttpClient httpClient = new HttpClient();
-        string json = await httpClient.GetStringAsync(url);
-        T? obj = JsonConvert.DeserializeObject<T>(json);
+        using var httpClient = new HttpClient();
+        var json = await httpClient.GetStringAsync(url);
+        var obj = JsonConvert.DeserializeObject<T>(json);
 
         return obj ?? default;
     }
