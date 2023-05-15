@@ -98,7 +98,7 @@
                             <Button x:Name="ModInfo_enabledStatus" Canvas.Left="356.984" Canvas.Top="5" Width="207" Height="60" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource InfoButton}">
-                                        <Setter Property="Content" Value="{Binding Enabled}"/>
+                                        <Setter Property="Content" Value="Disabled"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Enabled}" Value="true">
                                                 <Setter Property="Content" Value="Enabled"/>
