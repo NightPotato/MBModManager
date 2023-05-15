@@ -311,6 +311,7 @@ namespace MBModManager
             // Close Dialog Controller
             controller.SetMessage("Successfully installed " + ModToInstall.Name + "!");
             controller.SetProgress(0.99999);
+            GeneralEvents.CLEANUP_WORKDIR();
             await Task.Delay(5000);
             await controller.CloseAsync();
 
