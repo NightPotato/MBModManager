@@ -169,31 +169,20 @@ public partial class MainWindow : MetroWindow
         ModDescriptionLabel.Text = selectedMod.Description;
         _modEnabledState.Set(selectedMod.IsEnabled);
 
+        TagsList.Clear();
         if (selectedMod.Tags != null)
         {
-            TagsList.Clear();
             foreach (var tag in selectedMod.Tags)
             {
                 TagsList.Add(tag);
             }
         }
 
-        if (selectedMod.DependsOn == null) return;
         DepsList.Clear();
-        foreach (var dep in selectedMod.DependsOn)
-        {
-            DepsList.Add(dep);
+        if (selectedMod.DependsOn != null) {
+            foreach (var dep in selectedMod.DependsOn) {
+                DepsList.Add(dep);
+            }
         }
-    }
-
-    // Drag-n-Drop Enter Check
-    private void ModInstallBoxDragEnter(object sender, DragEventArgs e)
-    {
-        e.Effects = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
-    }
-
-    private void ModInstallBoxDrop(object sender, DragEventArgs e)
-    {
-        InstallEvents.InstallMod(this, e);
     }
 }
