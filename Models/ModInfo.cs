@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -12,11 +13,11 @@ public class ModInfo
     public string? Image { get; set; }
     public string? Author { get; set; }
     public int? NexusId { get; set; }
-    [JsonPropertyName("isEnabled")] public bool IsEnabled { get; set; }
-    [JsonPropertyName("isInstalled")] public bool IsInstalled { get; set; }
+    [JsonProperty("isEnabled")] public bool IsEnabled { get; set; }
+    [JsonProperty("isInstalled")] public bool IsInstalled { get; set; }
     public Tag[]? Tags { get; set; }
-    public ModInfo[]? DependsOn { get; set; }
-    [JsonPropertyName("depends_on")] public List<string>? ModFiles { get; set; }
+    [JsonProperty("depends_on")] public ModInfo[]? DependsOn { get; set; }
+    public List<string>? ModFiles { get; set; }
 
     public ModInfo(int id, string modName, string desc, string image, string auth, int nexusModId, Tag[] tags)
     {

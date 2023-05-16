@@ -1,20 +1,22 @@
-﻿using MBModManager.Events;
+using MBModManager.Events;
 using MBModManager.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using MBModManager.Models;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using System.Text;
 
 namespace MBModManager;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow
+public partial class MainWindow : MetroWindow
 {
     public readonly Settings ClientSettings;
     public ObservableCollection<ModInfo> ModList { get; }
