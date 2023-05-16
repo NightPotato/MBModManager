@@ -11,6 +11,11 @@ namespace MBModManager.Controls {
     public partial class DropInstallControl : UserControl {
 
         // TODO: Implement Property to switch between Mod or Save install.
+        [DisplayName("Label Text"), Description("Change the Text in the Label."), Category("Appearance")]
+        public string LabelText {
+            get => DropInstallBoxLabel.Content.ToString();
+            set => DropInstallBoxLabel.Content = value;
+        }
 
         public DropInstallControl() {
             InitializeComponent();

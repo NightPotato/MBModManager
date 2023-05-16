@@ -69,7 +69,7 @@
                     </ListView>
                     <Button x:Name="LaunchGameButton" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Height="48" Style="{StaticResource MainButton}" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame"/>
                     <Button x:Name="BepInExInstallButton" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BepInExInstall"/>
-                    <local:DropInstallControl Canvas.Left="596" Canvas.Top="54.263"/>
+                    <local:DropInstallControl Canvas.Left="596" Canvas.Top="54.263" LabelText="Drop Mod.zip Here"/>
                     <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0" BorderThickness="1,1,1,0">
                         <Canvas Margin="0,0,0,30">
                             <ListView x:Name="ModDependenciesList" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="361" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="10" Canvas.Top="159" SelectionMode="Single">
