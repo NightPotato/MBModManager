@@ -11,7 +11,12 @@ namespace MBModManager.Controls {
     public partial class DropInstallControl : UserControl {
 
         // TODO: Implement Property to switch between Mod or Save install.
-        [DisplayName("Label Text"), Description("Change the Text in the Label."), Category("Appearance")]
+        public enum InstallTypes { MOD, SAVE }
+
+        [DisplayName("Installer Method"), Description("Change the Text in the Label."), Category("Installer Properties"), DefaultValue(InstallTypes.MOD)]
+        public InstallTypes InstallType { get; set; }
+
+        [DisplayName("Label Text"), Description("Change the Text in the Label."), Category("Installer Properties")]
         public string LabelText {
             get => DropInstallBoxLabel.Content.ToString();
             set => DropInstallBoxLabel.Content = value;
@@ -26,9 +31,18 @@ namespace MBModManager.Controls {
         }
 
         private void DropInstallControl_Drop(object sender, DragEventArgs e) {
+
             var window = (Application.Current.MainWindow as MainWindow);
             if (window == null) return;
-            InstallEvents.InstallMod(window, e);
+
+            switch (InstallType) {
+                case InstallTypes.SAVE:
+                    // Add SaveFile Install
+                    break;
+                case InstallTypes.MOD:
+                    InstallEvents.InstallMod(window, e);
+                    break;
+            }
         }
     }
 }
