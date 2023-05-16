@@ -3,8 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace MBModManager.Handlers;
 
-internal sealed class IsEnabledState : INotifyPropertyChanged {
-
+internal sealed class IsEnabledState : INotifyPropertyChanged
+{
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private bool _enabled;
@@ -12,7 +12,8 @@ internal sealed class IsEnabledState : INotifyPropertyChanged {
     public bool Enabled
     {
         get => _enabled;
-        set {
+        set
+        {
             _enabled = value;
             OnPropertyChanged();
 

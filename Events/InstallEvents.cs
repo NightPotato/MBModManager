@@ -11,9 +11,10 @@ using System.Windows;
 
 namespace MBModManager.Events;
 
-internal static class InstallEvents {
-
-    public static async void InstallBepInEx(MainWindow mv) {
+internal static class InstallEvents
+{
+    public static async void InstallBepInEx(MainWindow mv)
+    {
         // Dialog Controller Setup
         var dialogSettings = new MetroDialogSettings();
         var controller = await mv.ShowProgressAsync("Please wait...", "Downloading BepInEx from Github Releases.", false, dialogSettings);
@@ -23,21 +24,24 @@ internal static class InstallEvents {
         var workDir = System.AppDomain.CurrentDomain.BaseDirectory + "\\workDir";
         var worDirExists = Directory.Exists(workDir);
 
-        if (!worDirExists) {
+        if (!worDirExists)
+        {
             Directory.CreateDirectory(workDir);
         }
 
         // Check if the GamePath is set in the Options.
-        if (string.IsNullOrEmpty(mv.ClientSettings.GamePath)) {
-            ErrorHandler.BepInExInstallFailed(controller, "The Game Path was not set in the options. Please set a Game Path before installing a BepInEx.");
+        if (string.IsNullOrEmpty(mv.ClientSettings.GamePath))
+        {
+            ErrorHandler.ShowError(controller, "Game Path not set!", "The Game Path was not set in the options. Please set a Game Path before installing a BepInEx.");
             return;
         }
 
         // GetLatestRelease from Github
         var zipPath = workDir + "BepInEx.zip";
-        using (var client = new HttpClient()) {
+        using (var client = new HttpClient())
+        {
             controller.SetProgress(0.25f);
-            var response = await client.GetByteArrayAsync(InternalData.BepInExUrl);
+            var response = await client.GetByteArrayAsync(Constants.BepInExUrl);
             File.WriteAllBytes(zipPath, response);
             controller.SetProgress(0.35f);
             controller.SetMessage("Finished Downloading BepInEx.");
@@ -47,10 +51,13 @@ internal static class InstallEvents {
         controller.SetMessage("Installing BepInEx to Game Directory.");
         controller.SetProgress(0.45f);
 
-        try {
+        try
+        {
             ZipFile.ExtractToDirectory(zipPath, mv.ClientSettings.GamePath);
-        } catch {
-            ErrorHandler.BepInExInstallFailed(controller, "Game already contains some of BepInEx files. Please remove these files from your game before installing.");
+        }
+        catch
+        {
+            ErrorHandler.ShowError(controller, "Game already contains some of BepInEx files. Please remove these files from your game before installing.");
             return;
         }
 
@@ -68,15 +75,17 @@ internal static class InstallEvents {
     }
 
 
-    public static async void InstallMod(MainWindow mv, DragEventArgs e) {
+    public static async void InstallMod(MainWindow mv, DragEventArgs e)
+    {
         // Setup Dialog Controller
         var dialogSettings = new MetroDialogSettings();
         var controller = await mv.ShowProgressAsync("Installing Mod!", "Moving Mod to working-directory.", false, dialogSettings);
         controller.SetProgressBarForegroundBrush(new SolidColorBrush(Color.FromRgb(71, 125, 17)));
 
         // Check if GamePath is set
-        if (mv.ClientSettings.GamePath == null || mv.ClientSettings.GamePath == "Path Not Set") {
-            ErrorHandler.ModInstallFailed(controller, "GamePath was not set in options, please set the GamePath and try again.", false);
+        if (mv.ClientSettings.GamePath == null || mv.ClientSettings.GamePath == "Path Not Set")
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "GamePath was not set in options, please set the GamePath and try again.");
             return;
         }
 
@@ -84,14 +93,16 @@ internal static class InstallEvents {
         var filePaths = (string[]?)e.Data.GetData(DataFormats.FileDrop, false);
 
         // Check if filePaths is null
-        if (filePaths == null) {
-            ErrorHandler.ModInstallFailed(controller, "There is something wrong with the file provided, please try a different file.", false);
+        if (filePaths == null)
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "There was an error with the file provided, please try a different file.");
             return;
         }
         controller.SetProgress(0.05);
 
-        if (filePaths.Length > 1) {
-            ErrorHandler.ModInstallFailed(controller, "Please only drop one mod at a time. We currently do not support installing multiple mods at a time.", false);
+        if (filePaths.Length > 1)
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "Please only drop one mod at a time. We currently do not support installing multiple mods at a time.");
             return;
         }
         controller.SetProgress(0.10);
@@ -105,16 +116,18 @@ internal static class InstallEvents {
 
         // Check if The file dropped is a zip file.
         controller.SetMessage("Checking if Valid mod.zip...");
-        if (Path.GetExtension(filePaths[0]) != ".zip") {
-            ErrorHandler.ModInstallFailed(controller, "The file provided was not a valid mod, please try a different file.", false);
+        if (Path.GetExtension(filePaths[0]) != ".zip")
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "The file provided was not a valid mod, please try a different file.");
             return;
         }
         controller.SetProgress(0.20);
 
         // Check if the New File already exists in workdir.
         var fileName = Path.GetFileName(filePaths[0]);
-        if (File.Exists(workDir + "\\" + fileName)) {
-            ErrorHandler.ModInstallFailed(controller, "The working directory aready contains the file your trying to install. Please cleanup the workDir in the options menu!", false);
+        if (File.Exists(workDir + "\\" + fileName))
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "The working directory aready contains the file your trying to install. Please cleanup the workDir in the options menu!");
             return;
         }
 
@@ -128,12 +141,14 @@ internal static class InstallEvents {
         // Parse ModID from FileName
         var match = Regex.Match(fileName, @"(-\d\d-)", RegexOptions.IgnoreCase);
         string modId;
-        if (match.Success) {
+        if (match.Success)
+        {
             modId = match.Groups[1].Value;
             modId = modId.Trim(new[] { '-' });
         }
-        else {
-            ErrorHandler.ModInstallFailed(controller, fileName, true);
+        else
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "The file provided was not a valid mod, please try a different file.");
             return;
         }
         controller.SetProgress(0.29);
@@ -146,10 +161,13 @@ internal static class InstallEvents {
 
         // Unzip mod.zip to ModDir
         var zipPath = workDir + "\\" + fileName;
-        try {
+        try
+        {
             ZipFile.ExtractToDirectory(zipPath, outputDir);
-        } catch {
-            ErrorHandler.ModInstallFailed(controller, "Could not extract the mod to working directory, performing cleanup of Working Directory.", true);
+        }
+        catch
+        {
+            ErrorHandler.ShowError(controller, "Mod Install Failed!", "Could not extract the mod to working directory, performing cleanup of Working Directory.");
             return;
         }
 
@@ -163,7 +181,8 @@ internal static class InstallEvents {
         controller.SetProgress(0.40);
 
         // Copy Mod in modDir to GamePath/BepInEx/
-        foreach (var pluginPath in pluginsDlls) {
+        foreach (var pluginPath in pluginsDlls)
+        {
             var name = Path.GetFileName(pluginPath);
             modToInstall.ModFiles?.Add(name);
             // Make exception for patcher files. Currently no released mods use a patcher so can't test this with a real install.
@@ -182,7 +201,12 @@ internal static class InstallEvents {
 
         // Refresh Mod List
         mv.ModList.Clear();
-        ApiHandler.GetAllMods(mv);
+        var mods = ApiHandler.GetAllMods();
+        foreach (ModInfo mod in mods)
+        {
+            if (mv.ModList.Contains(mod)) return;
+            mv.ModList.Add(mod);
+        }
 
         // Close Dialog Controller
         controller.SetMessage("Successfully installed " + modToInstall.Name + "!");
