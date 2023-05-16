@@ -3,6 +3,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                 xmlns:local="clr-namespace:MBModManager.Controls" 
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  Title="Mon Bazou - Mod Manager"
@@ -66,13 +67,9 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Grid HorizontalAlignment="Center" Canvas.Left="598" Canvas.Top="54.263" VerticalAlignment="Center">
-                        <Rectangle x:Name="ModInstallBox" Height="184" Stroke="#CC60A917" Width="584" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FF101010" Drop="ModInstallBoxDrop" DragEnter="ModInstallBoxDragEnter" AllowDrop="True"/>
-                        <iconPacks:PackIconModern Kind="DiskDownload" Foreground="#FFDADADA" Height="41" Width="65" HorizontalAlignment="Center" Margin="0,51,0,0"/>
-                        <Label Content="Drop Mod.zip Here" Foreground="#FFC3C3C3" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,97,0,0"/>
-                    </Grid>
                     <Button x:Name="LaunchGameButton" Content="Launch Game" Canvas.Left="745" Canvas.Top="664.263" Width="437" Height="48" Style="{StaticResource MainButton}" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="LaunchGame"/>
                     <Button x:Name="BepInExInstallButton" Content="Install BepInEx" Canvas.Left="598" Canvas.Top="664.263" Width="142" Style="{StaticResource MainButton}" Height="48" FontWeight="Bold" FontFamily="Bahnschrift" Foreground="#FFEDEDED" mah:ControlsHelper.ContentCharacterCasing="Upper" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BepInExInstall"/>
+                    <local:DropInstallControl Canvas.Left="596" Canvas.Top="54.263"/>
                     <GroupBox Height="403" Header="Mod Information" Width="584" Canvas.Left="598" Canvas.Top="250.263" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#FF101010" Foreground="#FFE0E0E0" BorderThickness="1,1,1,0">
                         <Canvas Margin="0,0,0,30">
                             <ListView x:Name="ModDependenciesList" d:ItemsSource="{d:SampleData ItemCount=3}" Height="169" RenderTransformOrigin="0,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="361" Background="#FF101010" BorderBrush="#CC60A917" BorderThickness="2,2,2,2" Canvas.Left="10" Canvas.Top="159" SelectionMode="Single">
